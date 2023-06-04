@@ -39,6 +39,7 @@ export async function requestOpenai(req: NextRequest) {
   };
 
   try {
+    // call reqHooks
     const res = await fetch(fetchUrl, fetchOptions);
 
     if (res.status === 401) {
@@ -52,6 +53,7 @@ export async function requestOpenai(req: NextRequest) {
       });
     }
 
+    // call resHooks
     return res;
   } finally {
     clearTimeout(timeoutId);

@@ -707,6 +707,7 @@ export function Chat() {
               }}
             />
           </div>
+          <div className="window-action-button">No plugins available</div>
           {!isMobileScreen && (
             <div className="window-action-button">
               <IconButton
