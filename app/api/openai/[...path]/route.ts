@@ -3,6 +3,24 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "../../auth";
 import { requestOpenai } from "../../common";
 
+const role_map = {
+  system: "Human",
+  user: "Human",
+  assistant: "Assistant",
+};
+
+function convertMessagesToPrompt(messages: any) {
+  let prompt = "";
+  for (const message of messages) {
+    const role = message["role"];
+    const content = message["content"];
+    const transformed_role = role_map[role] || "Human";
+    prompt += `\n\n${transformed_role}: ${content}`;
+  }
+  prompt += "\n\nAssistant: ";
+  return prompt;
+}
+
 async function handle(
   req: NextRequest,
   { params }: { params: { path: string[] } },

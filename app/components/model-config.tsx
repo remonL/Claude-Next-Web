@@ -55,7 +55,7 @@ export function ModelConfigList(props: {
         <input
           type="number"
           min={100}
-          max={32000}
+          max={100000}
           value={props.modelConfig.max_tokens}
           onChange={(e) =>
             props.updateConfig(
@@ -66,26 +66,6 @@ export function ModelConfigList(props: {
             )
           }
         ></input>
-      </ListItem>
-      <ListItem
-        title={Locale.Settings.PresencePenalty.Title}
-        subTitle={Locale.Settings.PresencePenalty.SubTitle}
-      >
-        <InputRange
-          value={props.modelConfig.presence_penalty?.toFixed(1)}
-          min="-2"
-          max="2"
-          step="0.1"
-          onChange={(e) => {
-            props.updateConfig(
-              (config) =>
-                (config.presence_penalty =
-                  ModalConfigValidator.presence_penalty(
-                    e.currentTarget.valueAsNumber,
-                  )),
-            );
-          }}
-        ></InputRange>
       </ListItem>
 
       <ListItem

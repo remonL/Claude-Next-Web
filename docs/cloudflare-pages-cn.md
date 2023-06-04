@@ -20,7 +20,7 @@
 
     - `NODE_VERSION=20.1`
     - `NEXT_TELEMETRY_DISABLE=1`
-    - `OPENAI_API_KEY=你自己的API Key`
+    - `CLAUDE_API_KEY=你自己的API Key`
     - `YARN_VERSION=1.22.19`
     - `PHP_VERSION=7.4`
 

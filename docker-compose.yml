@@ -7,7 +7,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - OPENAI_API_KEY=$OPENAI_API_KEY
+      - CLAUDE_API_KEY=$OPENAI_API_KEY
       - CODE=$CODE
       - BASE_URL=$BASE_URL
       - OPENAI_ORG_ID=$OPENAI_ORG_ID
@@ -21,7 +21,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - OPENAI_API_KEY=$OPENAI_API_KEY
+      - CLAUDE_API_KEY=$OPENAI_API_KEY
       - CODE=$CODE
       - PROXY_URL=$PROXY_URL
       - BASE_URL=$BASE_URL

@@ -9,8 +9,14 @@ import {
 } from "@fortaine/fetch-event-source";
 import { prettyObject } from "@/app/utils/format";
 
+const roleMap = {
+  system: "Human",
+  user: "Human",
+  assistant: "Assistant",
+};
+
 export class ChatGPTApi implements LLMApi {
-  public ChatPath = "v1/chat/completions";
+  public ChatPath = "v1/complete";
   public UsagePath = "dashboard/billing/usage";
   public SubsPath = "dashboard/billing/subscription";
 
@@ -27,10 +33,9 @@ export class ChatGPTApi implements LLMApi {
   }
 
   async chat(options: ChatOptions) {
-    const messages = options.messages.map((v) => ({
-      role: v.role,
-      content: v.content,
-    }));
+    const prompt = options.messages.reduce((res, v) => {
+      return `${res}\n\n${roleMap[v.role]}: ${v.content}`;
+    }, "");
 
     const modelConfig = {
       ...useAppConfig.getState().modelConfig,
@@ -41,11 +46,10 @@ export class ChatGPTApi implements LLMApi {
     };
 
     const requestPayload = {
-      messages,
+      prompt,
       stream: options.config.stream,
       model: modelConfig.model,
       temperature: modelConfig.temperature,
-      presence_penalty: modelConfig.presence_penalty,
     };
 
     console.log("[Request] openai payload: ", requestPayload);

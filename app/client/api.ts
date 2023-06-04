@@ -2,7 +2,7 @@ import { ACCESS_CODE_PREFIX } from "../constant";
 import { ChatMessage, ModelConfig, ModelType, useAccessStore } from "../store";
 import { ChatGPTApi } from "./platforms/openai";
 
-export const ROLES = ["system", "user", "assistant"] as const;
+export const ROLES = ["user", "assistant"] as const;
 export type MessageRole = (typeof ROLES)[number];
 
 export const Models = ["gpt-3.5-turbo", "gpt-4"] as const;
@@ -18,8 +18,6 @@ export interface LLMConfig {
   temperature?: number;
   top_p?: number;
   stream?: boolean;
-  presence_penalty?: number;
-  frequency_penalty?: number;
 }
 
 export interface ChatOptions {
@@ -100,7 +98,7 @@ export function getHeaders() {
     "x-requested-with": "XMLHttpRequest",
   };
 
-  const makeBearer = (token: string) => `Bearer ${token.trim()}`;
+  const makeBearer = (token: string) => `${token.trim()}`;
   const validString = (x: string) => x && x.length > 0;
 
   // use user's api key first

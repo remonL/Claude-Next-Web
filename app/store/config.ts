@@ -30,7 +30,7 @@ export const DEFAULT_CONFIG = {
   dontShowMaskSplashScreen: false, // dont show splash screen when create chat
 
   modelConfig: {
-    model: "gpt-3.5-turbo" as ModelType,
+    model: "claude-instant-v1" as ModelType,
     temperature: 0.5,
     max_tokens: 2000,
     presence_penalty: 0,
@@ -49,60 +49,52 @@ export type ChatConfigStore = ChatConfig & {
 
 export type ModelConfig = ChatConfig["modelConfig"];
 
-const ENABLE_GPT4 = true;
+const ENABLE_100K = true;
 
 export const ALL_MODELS = [
   {
-    name: "gpt-4",
-    available: ENABLE_GPT4,
-  },
-  {
-    name: "gpt-4-0314",
-    available: ENABLE_GPT4,
-  },
-  {
-    name: "gpt-4-32k",
-    available: ENABLE_GPT4,
-  },
-  {
-    name: "gpt-4-32k-0314",
-    available: ENABLE_GPT4,
-  },
-  {
-    name: "gpt-4-mobile",
-    available: ENABLE_GPT4,
-  },
-  {
-    name: "text-davinci-002-render-sha-mobile",
+    name: "claude-instant-v1",
     available: true,
   },
   {
-    name: "gpt-3.5-turbo",
+    name: "claude-instant-v1-100k",
+    available: ENABLE_100K,
+  },
+  {
+    name: "claude-v1",
     available: true,
   },
   {
-    name: "gpt-3.5-turbo-0301",
+    name: "claude-v1-100k",
+    available: ENABLE_100K,
+  },
+  {
+    name: "claude-instant-v1.1",
     available: true,
   },
   {
-    name: "qwen-v1", // 通义千问
-    available: false,
+    name: "claude-instant-v1.1-100k",
+    available: ENABLE_100K,
   },
   {
-    name: "ernie", // 文心一言
-    available: false,
+    name: "claude-instant-v1.0",
+    available: true,
   },
   {
-    name: "spark", // 讯飞星火
-    available: false,
+    name: "claude-v1.3",
+    available: true,
   },
   {
-    name: "llama", // llama
-    available: false,
+    name: "claude-v1.3-100k",
+    available: ENABLE_100K,
   },
   {
-    name: "chatglm", // chatglm-6b
-    available: false,
+    name: "claude-v1.2",
+    available: true,
+  },
+  {
+    name: "claude-v1.0",
+    available: true,
   },
 ] as const;
 
@@ -132,10 +124,7 @@ export const ModalConfigValidator = {
     return limitModel(x) as ModelType;
   },
   max_tokens(x: number) {
-    return limitNumber(x, 0, 32000, 2000);
-  },
-  presence_penalty(x: number) {
-    return limitNumber(x, -2, 2, 0);
+    return limitNumber(x, 0, 100000, 2000);
   },
   temperature(x: number) {
     return limitNumber(x, 0, 1, 1);

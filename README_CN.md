@@ -109,7 +109,7 @@ OpenAI 接口代理 URL，如果你手动配置了 openai 接口代理，请填�
 在开始写代码之前，需要在项目根目录新建一个 `.env.local` 文件，里面填入环境变量：
 
 ```
-OPENAI_API_KEY=<your api key here>
+CLAUDE_API_KEY=<your api key here>
 ```
 
 ### 本地开发
@@ -130,7 +130,7 @@ OPENAI_API_KEY=<your api key here>
 docker pull yidadaa/chatgpt-next-web
 
 docker run -d -p 3000:3000 \
-   -e OPENAI_API_KEY="sk-xxxx" \
+   -e CLAUDE_API_KEY="sk-xxxx" \
    -e CODE="页面访问密码" \
    yidadaa/chatgpt-next-web
 ```
@@ -139,7 +139,7 @@ docker run -d -p 3000:3000 \
 
 ```shell
 docker run -d -p 3000:3000 \
-   -e OPENAI_API_KEY="sk-xxxx" \
+   -e CLAUDE_API_KEY="sk-xxxx" \
    -e CODE="页面访问密码" \
    --net=host \
    -e PROXY_URL="http://127.0.0.1:7890" \
